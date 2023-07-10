@@ -25,7 +25,7 @@
           stage ('Helm Chart') {
             container('build') {
                 withCredentials([usernamePassword(credentialsId: 'jfrog', usernameVariable: 'username', passwordVariable: 'password')]) {
-                      sh '/usr/local/bin/helm repo add eos-helm-local  https://eosartifacts.jfrog.io/artifactory/eos-helm-local --username $username --password $password'
+                      sh '/usr/local/bin/helm repo add eos-helm-local  https://eosartifact.jfrog.io/artifactory/eos-helm-local --username $username --password $password'
                       sh "/usr/local/bin/helm repo update"
                       sh "/usr/local/bin/helm upgrade  --install --force gateway-api  --namespace ${env} -f values.yaml eos-helm-local/gateway-api"
                       sh "/usr/local/bin/helm list -a --namespace ${env}"
